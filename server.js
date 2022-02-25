@@ -18,18 +18,14 @@ const Routes = require('./routes/routes')
 require('./db/db')
 
 // server static assets if in production
-if(process.env.NODE_ENV === 'production'){    
-    app.use(express.static('client/build'))  // set static folder 
-    //returning frontend for any route other than api 
-    app.get('*',(req,res)=>{     
-        res.sendFile (path.resolve(__dirname,'client','build',         
-                      'index.html' ));    
-    });
-}
-
-app.get('/',(req,res) => {
-	 res.send("hellowordld")
+// Step 1:
+app.use(express.static(path.resolve(__dirname, "./client/build")));
+// Step 2:
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 });
+
+
 
 
 
